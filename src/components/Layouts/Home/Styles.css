@@ -1,0 +1,32 @@
+#homeContainer{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+}
+#divider{
+    border: 3px solid black;
+    height: 2px;
+    width: 100%;
+}
+#uploadSection{
+    position:relative;
+    right: 14cm;  
+}
+.homeContainer > div{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.homeContainer > h2 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+}  
+#alarmFirstImage{
+    text-align: center;
+    margin-top: 40px;
+}

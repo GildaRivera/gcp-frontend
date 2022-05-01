@@ -1,0 +1,14 @@
+.mainPictureContainer{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+#description{
+    margin-top: 10px;
+    
+}
+.mainPictureContainer > button{
+    margin-top: 10px;
+    border-radius: 10px;
+}
