@@ -11,7 +11,7 @@ import { Loading, Notify } from "notiflix";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginR } from "../../redux/user/reducer";
+import { loginR } from "../../redux/user/reducer"
 import "./login.css";
 
 // const dotenv = require("dotenv");
@@ -69,6 +69,7 @@ export const Login = (props) => {
       })
       .then(async function (actualData) {
         setlogged(true);
+        console.log("Login",actualData)
        await dispatch(loginR({user:actualData.data[0], token:actualData.token}));
       })
       .catch((err) => {

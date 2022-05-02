@@ -14,7 +14,7 @@ export const Home = () => {
     const [open, setOpen] = React.useState(false)
     const { user } = useSelector((state) => state.user);
     React.useEffect(()=>{
-        getAllPicture(4)
+        getAllPicture(user.id)
             .then(res => {
                 console.log(res.data)
                 setImages(res.data)

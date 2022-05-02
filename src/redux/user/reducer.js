@@ -15,7 +15,7 @@ const slice = createSlice({
     },
     reducers: {
       login: (state, action) => {
-   console.log(action)
+   console.log("action",action)
         state.user = action.payload;
         //localStorage.setItem('user', JSON.stringify(action.payload))
       },
@@ -41,11 +41,11 @@ const slice = createSlice({
  export const loginR =
   ({user,token}) =>
   async (dispatch) => {
-
+    console.log("loginR",user)
     try {
      
       dispatch(login({username:user.username, password:user.password, id:user.id, biografia:user.biografia, gravatar:user.gravatar, name: user.name}));
-        dispatch(saveToken({token:token}))
+      dispatch(saveToken({token:token}))
     } catch (e) {
       console.log("e: ", e);
       return console.error(e.message);

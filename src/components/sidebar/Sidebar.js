@@ -27,7 +27,7 @@ import { Home } from "../Layouts/Home/Home";
 import  Album  from "../Layouts/Album/Album";
 import { Profile } from "../Layouts/Profile/Profile";
 import { PreviewAlbum } from "../Album/PreviewAlbum";
-import { Profile } from "../Layouts/Profile/Profile";
+
 
 
 const Sidebar = () => {

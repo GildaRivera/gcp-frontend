@@ -9,10 +9,11 @@ import { createAlbum, getAlbums } from "../../../helpers/api";
 import  UploadPicture  from "../../UploadPicture/UploadPicute";
 import { useNavigate } from 'react-router-dom';
 import { setAlbumId } from "../../../redux/album/action";
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 
 const Album = (props) => {
+    const { user } = useSelector((state) => state.user);
     const [open, setOpen] = React.useState(false)
     const [pictureModal, setPictureModal] = React.useState(false)
     const [currentAlbum, setCurrentAlbum] = React.useState('')
@@ -22,7 +23,7 @@ const Album = (props) => {
     
     const uploadAlbum = async () => {
         try {
-            const album = await createAlbum(nameAlbum,4)
+            const album = await createAlbum(nameAlbum,user.id)
             setCurrentAlbum(album.id)
             props.setAlbumId(album.data.id)
             //props.setAlbumId(16)
@@ -45,7 +46,7 @@ const Album = (props) => {
     }
 
     React.useEffect(()=>{
-        getAlbums(4)
+        getAlbums(user.id)
             .then(response => {
                 console.log(response.data)
                 setAlbums(response.data)

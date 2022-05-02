@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { connect } from 'react-redux';
+import { connect, useSelector} from 'react-redux';
 import "./Styles.css"
 import { attachPictureToAlbum, uploadPicture } from "../../helpers/api";
 
 
 const UploadPicture = (props) => {
+    const { user } = useSelector((state) => state.user);
     const [fileToUpload, setFile] = React.useState({
         file:[],
         filepreview:null,
@@ -26,7 +27,7 @@ const UploadPicture = (props) => {
         props.setModal(false)
         const formData = new FormData()
         formData.append('file',fileToUpload.file)
-        formData.append('user_id',4)
+        formData.append('user_id',user.id)
         formData.append('description',description)
 
         if(props.album && props.album.albumId){
