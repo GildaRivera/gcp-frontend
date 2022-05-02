@@ -24,7 +24,9 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./Styles.css";
 
 import { Home } from "../Layouts/Home/Home";
-import { Album } from "../Layouts/Album/Album";
+import  Album  from "../Layouts/Album/Album";
+import { Profile } from "../Layouts/Profile/Profile";
+import { PreviewAlbum } from "../Album/PreviewAlbum";
 import { Profile } from "../Layouts/Profile/Profile";
 
 
@@ -82,6 +84,7 @@ const Sidebar = () => {
           <Route  path='/' element={< Home />}></Route>
           <Route exact path="profile" element={<Profile/>}></Route>
           <Route exact path="album" element={<Album/>}></Route>
+          <Route exact path="album/previewAlbum" element={<PreviewAlbum/>}></Route>
         </Routes>  
       </div>
     </>
