@@ -12,7 +12,7 @@ function App() {
   const { user } = useSelector((state) => state.user);
 
   return (
-    <Provider store={store}>
+
       <Router>
         <div className="App">
           <Routes >
@@ -22,7 +22,7 @@ function App() {
           </Routes>
         </div>   
       </Router>
-    </Provider>
+ 
   );
 }
 
