@@ -37,7 +37,9 @@ export const Login = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (logged) {
+
       navigate("/home");
+
     }
   }, [logged]);
   async function handleLog() {

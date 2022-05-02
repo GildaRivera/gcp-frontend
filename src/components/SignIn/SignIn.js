@@ -32,6 +32,8 @@ export default function SignIn(props) {
     if (logged) {
       //  props.handleLogin(true, user);
       navigate("/");
+
+
     }
   }, [logged]);
   async function handleCreate() {
