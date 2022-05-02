@@ -31,7 +31,9 @@ export default function SignIn(props) {
   useEffect(() => {
     if (logged) {
       //  props.handleLogin(true, user);
-      navigate("/home");
+      navigate("/");
+
+
     }
   }, [logged]);
   async function handleCreate() {
