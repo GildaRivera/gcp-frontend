@@ -7,12 +7,12 @@ import {MenuItem} from "react-pro-sidebar";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import  UploadPicture  from "../../UploadPicture/UploadPicute";
-
+import {  useSelector } from "react-redux";
 
 export const Home = () => {
     const [images, setImages] = React.useState([])
     const [open, setOpen] = React.useState(false)
-    
+    const { user } = useSelector((state) => state.user);
     React.useEffect(()=>{
         getAllPicture(4)
             .then(res => {
@@ -43,7 +43,7 @@ export const Home = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <h2>Welcome Back Fernando</h2>
+            <h2>Welcome Back {user.name}</h2>
             <section id="uploadSection">
                 <MenuItem onClick={()=>setOpen(true)} icon={<BsCloudPlus  size={30}/>} />  
             </section>

@@ -10,7 +10,6 @@ const UploadPicture = (props) => {
         file:[],
         filepreview:null,
     });
-    console.log('album',props)
     const [description,setDescription] =React.useState()
     const [image, setImage] = React.useState() 
     
