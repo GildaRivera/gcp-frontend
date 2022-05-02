@@ -6,7 +6,7 @@ import { BsCloudPlus } from "react-icons/bs";
 import {MenuItem} from "react-pro-sidebar";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { UploadPicture } from "../../UploadPicture/UploadPicute";
+import  UploadPicture  from "../../UploadPicture/UploadPicute";
 import {  useSelector } from "react-redux";
 
 export const Home = () => {
@@ -25,7 +25,6 @@ export const Home = () => {
     },[])
     const setImageAndReload = (value) => {
         setOpen(value)
-        window.location.reload()
     }
     return (
         <div className="homeContainer" id="homeContainer">
@@ -51,7 +50,7 @@ export const Home = () => {
             <section id="divider"/>
             <div>
                 {images && images.length > 0 ?
-                    images.map(image => <Picture key={image.url} url={image.url} description={image.description}/> )
+                    images.map((image,index) => <Picture key={index} url={image.url} description={image.description}/> )
                     : <h1 id="alarmFirstImage"> Add your first image! </h1>
                 }
             </div>    
