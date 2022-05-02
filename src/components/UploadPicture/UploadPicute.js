@@ -1,14 +1,16 @@
 import React from "react";
 import axios from "axios";
-//import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import "./Styles.css"
+import { attachPictureToAlbum, uploadPicture } from "../../helpers/api";
 
 
-export const UploadPicture = ({setModal}) => {
+const UploadPicture = (props) => {
     const [fileToUpload, setFile] = React.useState({
         file:[],
         filepreview:null,
     });
+    console.log('album',props)
     const [description,setDescription] =React.useState()
     const [image, setImage] = React.useState() 
     
@@ -21,17 +23,25 @@ export const UploadPicture = ({setModal}) => {
           filepreview:URL.createObjectURL(event.target.files[0]),
         });
     }
-    const onSubmit = () => {
-        setModal(false)
+    const onSubmit = async () => {
+        props.setModal(false)
         const formData = new FormData()
         formData.append('file',fileToUpload.file)
         formData.append('user_id',4)
         formData.append('description',description)
 
-        axios.post('http://localhost:3001/api/uploadImage',formData)
-            .then(res => { // then print response status
-                console.log(res)
-            })
+        if(props.album && props.album.albumId){
+            const uploadedImage = await uploadPicture(formData)
+            console.log("uploadImage",uploadedImage)
+            if(uploadPicture === 'error') return console.error(uploadPicture)
+            const albumToImage = new FormData()
+            albumToImage.append('album',props.album.albumId)
+            albumToImage.append('image',uploadedImage.data.id)
+            const addImageToAlbum = await attachPictureToAlbum(albumToImage)
+            console.log("Attach Album",addImageToAlbum) 
+        }else{
+            const uploadedImage = await uploadPicture(formData)
+        }
     }
     return(
         <div className="mainPictureContainer">
@@ -44,8 +54,8 @@ export const UploadPicture = ({setModal}) => {
     )
 }
 
-/* const mapStateToPros = state => {
+const mapStateToPros = state => {
     return state
 }
 
-export default connect(mapStateToPros,null)(UploadPicture) */
+export default connect(mapStateToPros,null)(UploadPicture) 

@@ -8,17 +8,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
 
   return (
-    <Router>
-      <div className="App">
-       
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+        
           <Routes >
             {/* <Route exact path='/' element={< Login />}></Route> 
             <Route exact path='/signUp' element={< SingUp />}></Route> */}
             {/* localStorage.getItem('user') */ true ? <Route exact path='/home/*' element = {<Sidebar/>}/> : <></>}
           </Routes>
-      </div>   
-    </Router>
-   
+        </div>   
+      </Router>
+    </Provider>
   );
 }
 
