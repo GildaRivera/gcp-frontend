@@ -19,7 +19,9 @@ function App() {
            
             <Route exact path='/' element = {<Login />}/>
             <Route exact path='/create' element = {<SignIn />}/>
-            { user? <Route exact path='/home/*' element = {<Sidebar/>}/> : <></>}
+            <Route exact path='/home/*' element = {<Sidebar/>}/>
+            {/* { user?( <Route exact path='/home/*' element = {<Sidebar/>}/>
+            ) : <></>} */}
             
           </Routes>
       </div>   

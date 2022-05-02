@@ -24,12 +24,14 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./Styles.css";
 
 import { Home } from "../Layouts/Home/Home";
-import { Album } from "../Layouts/Album/Album";
+// import { Album } from "../Layouts/Album/Album";
 import { Profile } from "../Layouts/Profile/Profile";
+import { useDispatch } from "react-redux";
 
+import { logoutR } from "../../redux/user/reducer";
 
 const Sidebar = () => {
-  
+  const dispatch = useDispatch();
     //create initial menuCollapse state using useState hook
   const [menuCollapse, setMenuCollapse] = useState(false)
   const navigate = useNavigate()
@@ -72,7 +74,10 @@ const Sidebar = () => {
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
+              <MenuItem icon={<FiLogOut />} onClick={ async()=>{
+                 await dispatch(logoutR());
+                 navigate('/')
+              }}>Logout</MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>
@@ -81,7 +86,7 @@ const Sidebar = () => {
         <Routes>
           <Route  path='/' element={< Home />}></Route>
           <Route exact path="profile" element={<Profile/>}></Route>
-          <Route exact path="album" element={<Album/>}></Route>
+          {/* <Route exact path="album" element={<Album/>}></Route> */}
         </Routes>  
       </div>
     </>

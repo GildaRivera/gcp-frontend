@@ -21,6 +21,7 @@ const slice = createSlice({
       },
       logout: (state, action) => {
         state.user = null;
+        state.token = null
         //localStorage.removeItem('user')
       },
       singin: (state, action) => {
@@ -30,13 +31,16 @@ const slice = createSlice({
       saveToken: (state, action) => {
         state.token = action.payload;
       },
+      update: (state, action) => {
+        state.user= action.payload;
+      },
       
     },
   });
   
   export default slice.reducer;
   
- const { login, logout, singin, saveToken } = slice.actions;
+ const { login, logout, singin, saveToken, update } = slice.actions;
 
  export const loginR =
   ({user,token}) =>
@@ -46,6 +50,32 @@ const slice = createSlice({
      
       dispatch(login({username:user.username, password:user.password, id:user.id, biografia:user.biografia, gravatar:user.gravatar, name: user.name}));
         dispatch(saveToken({token:token}))
+    } catch (e) {
+      console.log("e: ", e);
+      return console.error(e.message);
+    }
+  };
+
+  
+  export const logoutR =
+  () =>
+  async (dispatch) => {
+
+    try {
+     
+      dispatch(logout());
+    } catch (e) {
+      console.log("e: ", e);
+      return console.error(e.message);
+    }
+  };
+
+  export const updateR =
+  ({user,token}) =>
+  async (dispatch) => {
+    try {
+     
+      dispatch(update({username:user.username, password:user.password, id:user.id, biografia:user.biografia, gravatar:user.gravatar, name: user.name}));
     } catch (e) {
       console.log("e: ", e);
       return console.error(e.message);
