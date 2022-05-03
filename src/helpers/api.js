@@ -50,7 +50,6 @@ export const getAlbums = async (userId) => {
         const response = await axios.get(`${URL}/album`,{params: {userId: userId}})
         return response.data
     } catch (error) {
-        console.log(error)
         return 'error'
     }
 }
@@ -61,6 +60,44 @@ export const getPicturesFromAlbum = async (albumId) => {
         return response.data
     } catch (error) {
         console.log(error.message)
+        return 'error'
+    }
+}
+
+export const deletePicture = async (pictureId) => {
+    try {
+        const response = await axios.delete(`${URL}/picture`,{ data: { picture: pictureId } })
+        return response.data
+    } catch (error) {
+        console.log(error.message)
+        return 'error'
+    }
+}
+
+export const deletePictureFromAlbum = async (albumId,pictureId) => {
+    try {
+        const response = await axios.delete(`${URL}/pictureFromAlbum`,{data:
+            {
+                album: albumId,
+                image: pictureId
+            }})
+        return response.data
+    } catch (error) {
+        console.log(error)
+        return 'error'
+    }
+}
+
+export const deleteAlbum = async (albumId) => {
+    try {
+        const response = await axios.delete(`${URL}/album`,{ data: { id: albumId } })
+        return response.data
+    } catch (error) {
+        try{
+            const response = await axios.delete(`${URL}/emptyAlbum`,{ data: { id: albumId } })
+        }catch(err){
+            console.log(err)
+        }
         return 'error'
     }
 }
