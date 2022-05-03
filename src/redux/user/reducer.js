@@ -88,7 +88,9 @@ const slice = createSlice({
   async (dispatch) => {
     console.log(user,token)
     
+
     const ENDPOINT = process.env.REACT_APP_ENDPOINT_API;
+
     try {
       await fetch(`${ENDPOINT}/user/${user.id}`, {
         method: "DELETE",
