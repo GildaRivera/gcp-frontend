@@ -62,6 +62,7 @@ export function Profile(props) {
       .then(async (actualData) => {
         setChanged(true);
         setUpdate(actualData);
+        console.log(form,actualData)
         await dispatch(updateR({ user: actualData }));
       })
       .catch((err) => {
@@ -81,7 +82,7 @@ export function Profile(props) {
       <div
         style={{
           position: "relative",
-          left: "14vw",
+          left: "4vw",
           display: "block",
           top: "8vh",
         }}

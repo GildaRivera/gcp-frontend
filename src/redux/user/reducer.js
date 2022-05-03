@@ -83,3 +83,35 @@ const slice = createSlice({
   };
 
   
+  export const deleteR =
+  ({user,token}) =>
+  async (dispatch) => {
+    console.log(user,token)
+    
+    const ENDPOINT = "http://localhost:3001/api";
+    try {
+      await fetch(`${ENDPOINT}/user/${user.id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `token ${token}`,
+        },
+      
+      })
+        .then((response) => {
+          if (response.ok) {
+            dispatch(logout());
+            return response.json();
+          }
+          throw Error;
+        })
+        .catch((err) => {
+ console.log(err)
+        });
+      
+    } catch (e) {
+      console.log("e: ", e);
+      return console.error(e.message);
+    }
+  };
