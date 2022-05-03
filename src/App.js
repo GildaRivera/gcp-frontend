@@ -1,5 +1,5 @@
 import './App.css';
-
+import React  from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import { Login } from './components/Login/Login';
 import  SignIn  from './components/SignIn/SignIn'
@@ -8,7 +8,12 @@ import {store} from './redux/store'
 import { Provider } from 'react-redux'
 import "bootstrap/dist/css/bootstrap.min.css";
 import {  useSelector } from "react-redux";
+const dotenv = require("dotenv");
+// get config vars
+dotenv.config();
+const ENDPOINT = process.env.REACT_APP_ENDPOINT_API;
 function App() {
+  console.log(ENDPOINT)
   const { user } = useSelector((state) => state.user);
 
   return (

@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateR } from "../../../redux/user/reducer";
 export function Profile(props) {
-  const ENDPOINT = "http://localhost:3001/api";
+  const ENDPOINT = process.env.REACT_APP_ENDPOINT_API;
   const { user } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state.user.token);
   const dispatch = useDispatch();
