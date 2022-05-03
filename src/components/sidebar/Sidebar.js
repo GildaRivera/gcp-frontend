@@ -14,7 +14,7 @@ import {
 //import icons from react icons
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillPicture } from "react-icons/ai";
-import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
+import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle,FiTrash2 } from "react-icons/fi";
 import {Route, Routes , useLocation, useNavigate} from 'react-router-dom'
 
 
@@ -27,11 +27,13 @@ import { Home } from "../Layouts/Home/Home";
 import  Album  from "../Layouts/Album/Album";
 import { Profile } from "../Layouts/Profile/Profile";
 import { PreviewAlbum } from "../Album/PreviewAlbum";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { logoutR } from "../../redux/user/reducer";
+import { logoutR, deleteR } from "../../redux/user/reducer";
 
 const Sidebar = () => {
+  const { user } = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.user.token);
   const dispatch = useDispatch();
     //create initial menuCollapse state using useState hook
   const [menuCollapse, setMenuCollapse] = useState(false)
@@ -79,6 +81,10 @@ const Sidebar = () => {
                  await dispatch(logoutR());
                  navigate('/')
               }}>Logout</MenuItem>
+                 <MenuItem icon={<FiTrash2 />} onClick={ async()=>{
+                 await dispatch(deleteR({user:user, token:token}));
+                 navigate('/')
+              }}>Delete Account</MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>
