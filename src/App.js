@@ -15,7 +15,6 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT_API;
 function App() {
   console.log(ENDPOINT)
   const { user } = useSelector((state) => state.user);
-  console.log("user",user)
   return (
 
       <Router>

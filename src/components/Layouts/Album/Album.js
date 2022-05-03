@@ -17,7 +17,7 @@ const Album = (props) => {
     const { user } = useSelector((state) => state.user);
     const [open, setOpen] = React.useState(false)
     const [pictureModal, setPictureModal] = React.useState(false)
-    const [currentAlbum, setCurrentAlbum] = React.useState('')
+    const [render, setRender] = React.useState('')
     const [albums, setAlbums] = React.useState([])
     const [nameAlbum, setNameAlbumn] = React.useState('')
     const navigate = useNavigate()
@@ -25,12 +25,9 @@ const Album = (props) => {
     const uploadAlbum = async () => {
         try {
             const album = await createAlbum(nameAlbum,user.id)
-            setCurrentAlbum(album.data.id)
             props.setAlbumId(album.data.id)
-            //props.setAlbumId(16)
             setOpen(false)
             setPictureModal(true)
-            //console.log('Succesfully created',album.data.id)
         } catch (error) {
             console.log(error)
         }
@@ -38,7 +35,7 @@ const Album = (props) => {
 
     const mandatoryFirstPicture = (value) => {
         setPictureModal(value)
-        setCurrentAlbum('')
+        setRender('render')
     }
 
     const removeAlbum = async (id) => {
@@ -51,7 +48,6 @@ const Album = (props) => {
     }
     
     const viewSelectedAlbum = (album) => {
-        console.log(album)
         navigate('previewAlbum',{ state: {albumInfo: album}})
     }
 

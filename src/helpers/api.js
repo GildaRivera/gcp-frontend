@@ -91,6 +91,7 @@ export const deletePictureFromAlbum = async (albumId,pictureId) => {
 export const deleteAlbum = async (albumId) => {
     try {
         const response = await axios.delete(`${URL}/album`,{ data: { id: albumId } })
+        await axios.delete(`${URL}/emptyAlbum`,{ data: { id: albumId } })
         return response.data
     } catch (error) {
         try{

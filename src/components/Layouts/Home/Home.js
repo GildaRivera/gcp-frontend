@@ -12,6 +12,7 @@ import {  useSelector } from "react-redux";
 export const Home = () => {
     const [images, setImages] = React.useState([])
     const [open, setOpen] = React.useState(false)
+    const [render, setRender] = React.useState('')
     const { user } = useSelector((state) => state.user);
     React.useEffect(()=>{
         getAllPicture(user.id)
@@ -25,6 +26,7 @@ export const Home = () => {
     },[])
     const setImageAndReload = (value) => {
         setOpen(value)
+        setRender('render')
     }
     return (
         <div className="homeContainer" id="homeContainer">
