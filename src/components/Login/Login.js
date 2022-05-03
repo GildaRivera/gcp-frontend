@@ -18,7 +18,7 @@ import "./login.css";
 // // get config vars
 // dotenv.config();
 // const ENDPOINT = process.env.REACT_APP_ENDPOINT_API;
-const ENDPOINT = "http://localhost:3001/api";
+const ENDPOINT = process.env.REACT_APP_ENDPOINT_API;
 export const Login = (props) => {
   const [form, setForm] = useState({
     username: "",
