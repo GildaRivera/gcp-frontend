@@ -31,7 +31,6 @@ export const PreviewAlbum = () => {
                 console.log(err)
             })
     },[])
-    console.log(albumInfo)
     return(
         <div className="previewContainer">
              <Modal 
