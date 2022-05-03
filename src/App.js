@@ -4,7 +4,7 @@ import Sidebar from './components/sidebar/Sidebar';
 import { Login } from './components/Login/Login';
 import  SignIn  from './components/SignIn/SignIn'
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
-import {store} from './redux/store'
+import store from "./redux/index"
 import { Provider } from 'react-redux'
 import "bootstrap/dist/css/bootstrap.min.css";
 import {  useSelector } from "react-redux";
@@ -15,7 +15,7 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT_API;
 function App() {
   console.log(ENDPOINT)
   const { user } = useSelector((state) => state.user);
-
+  console.log("user",user)
   return (
 
       <Router>

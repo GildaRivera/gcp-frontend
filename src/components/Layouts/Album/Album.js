@@ -5,14 +5,16 @@ import { BiPhotoAlbum } from "react-icons/bi";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import './Styles.css'
-import { createAlbum, getAlbums } from "../../../helpers/api";
+import { createAlbum, deleteAlbum, getAlbums } from "../../../helpers/api";
 import  UploadPicture  from "../../UploadPicture/UploadPicute";
 import { useNavigate } from 'react-router-dom';
 import { setAlbumId } from "../../../redux/album/action";
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import trash from './trash.jpeg' 
 
 
 const Album = (props) => {
+    const { user } = useSelector((state) => state.user);
     const [open, setOpen] = React.useState(false)
     const [pictureModal, setPictureModal] = React.useState(false)
     const [currentAlbum, setCurrentAlbum] = React.useState('')
@@ -22,8 +24,8 @@ const Album = (props) => {
     
     const uploadAlbum = async () => {
         try {
-            const album = await createAlbum(nameAlbum,4)
-            setCurrentAlbum(album.id)
+            const album = await createAlbum(nameAlbum,user.id)
+            setCurrentAlbum(album.data.id)
             props.setAlbumId(album.data.id)
             //props.setAlbumId(16)
             setOpen(false)
@@ -38,6 +40,15 @@ const Album = (props) => {
         setPictureModal(value)
         setCurrentAlbum('')
     }
+
+    const removeAlbum = async (id) => {
+        try {
+            await deleteAlbum(id)
+            console.log("Removed Album")
+        } catch (error) {
+            console.log(error)
+        }
+    }
     
     const viewSelectedAlbum = (album) => {
         console.log(album)
@@ -45,7 +56,7 @@ const Album = (props) => {
     }
 
     React.useEffect(()=>{
-        getAlbums(4)
+        getAlbums(user.id)
             .then(response => {
                 console.log(response.data)
                 setAlbums(response.data)
@@ -97,7 +108,9 @@ const Album = (props) => {
                 {albums && albums.length > 0 ? 
                     albums.map(album => <section key={album.id}>
                         <MenuItem onClick={() => viewSelectedAlbum(album)} icon={< BiPhotoAlbum  size={60} />} />  
+                        <img onClick={()=>removeAlbum(album.id)} src={trash} width={30} height={30}/>
                         <p id="albumName">{album.name}</p>
+                       
                     </section>):<h2> Create your first Album! </h2>
                 }  
             </div>

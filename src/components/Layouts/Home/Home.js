@@ -14,7 +14,7 @@ export const Home = () => {
     const [open, setOpen] = React.useState(false)
     const { user } = useSelector((state) => state.user);
     React.useEffect(()=>{
-        getAllPicture(4)
+        getAllPicture(user.id)
             .then(res => {
                 console.log(res.data)
                 setImages(res.data)
@@ -50,7 +50,7 @@ export const Home = () => {
             <section id="divider"/>
             <div>
                 {images && images.length > 0 ?
-                    images.map((image,index) => <Picture key={index} url={image.url} description={image.description}/> )
+                    images.map((image,index) => <Picture key={index} url={image.url} description={image.description} id={image.id}/> )
                     : <h1 id="alarmFirstImage"> Add your first image! </h1>
                 }
             </div>    
