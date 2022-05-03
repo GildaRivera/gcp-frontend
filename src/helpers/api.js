@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const URL = 'http://localhost:3001/api'
+const URL = process.env.REACT_APP_ENDPOINT_API;
 
 export const uploadPicture = async (formData) => {
     try {
