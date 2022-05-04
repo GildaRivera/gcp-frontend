@@ -6,7 +6,7 @@ import { BsCloudPlus } from "react-icons/bs";
 import {MenuItem} from "react-pro-sidebar";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import  UploadPicture  from "../../UploadPicture/UploadPicute";
+import { UploadPicture}  from "../../UploadPicture/UploadPicute";
 import {  useSelector } from "react-redux";
 
 export const Home = () => {
@@ -15,6 +15,9 @@ export const Home = () => {
     const [render, setRender] = React.useState('')
     const { user } = useSelector((state) => state.user);
     React.useEffect(()=>{
+        if(localStorage.getItem('album')){
+            localStorage.removeItem('album')
+        }
         getAllPicture(user.id)
             .then(res => {
                 console.log(res.data)
