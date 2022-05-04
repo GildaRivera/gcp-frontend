@@ -5,15 +5,19 @@ import "./Styles.css"
 import { attachPictureToAlbum, uploadPicture } from "../../helpers/api";
 
 
-const UploadPicture = (props) => {
+export const UploadPicture = (props) => {
     const { user } = useSelector((state) => state.user);
+    //const { user } = useSelector((state) => state);
     const [fileToUpload, setFile] = React.useState({
         file:[],
         filepreview:null,
     });
     const [description,setDescription] =React.useState()
     const [image, setImage] = React.useState() 
-    
+    const album = Number(localStorage.getItem('album'))
+    console.log("Album id",album)
+    console.log("user",user)
+   
     const handleInputChange = (event) => {
         console.log(event.target.files[0])
         setImage(event.target.files[0])
@@ -30,18 +34,19 @@ const UploadPicture = (props) => {
         formData.append('user_id',user.id)
         formData.append('description',description)
 
-        if(props.album && props.album.albumId){
+        if(album){
             const uploadedImage = await uploadPicture(formData)
             console.log("uploadImage",uploadedImage)
             if(uploadPicture === 'error') return console.error(uploadPicture)
             const albumToImage = new FormData()
-            albumToImage.append('album',props.album.albumId)
+            albumToImage.append('album',album)
             albumToImage.append('image',uploadedImage.data.id)
             const addImageToAlbum = await attachPictureToAlbum(albumToImage)
+            localStorage.removeItem('album')
             console.log("Attach Album",addImageToAlbum) 
         }else{
             const uploadedImage = await uploadPicture(formData)
-        }
+        } 
     }
     return(
         <div className="mainPictureContainer">
@@ -54,8 +59,4 @@ const UploadPicture = (props) => {
     )
 }
 
-const mapStateToPros = state => {
-    return state
-}
 
-export default connect(mapStateToPros,null)(UploadPicture) 

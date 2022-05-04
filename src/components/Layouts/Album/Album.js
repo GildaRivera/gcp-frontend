@@ -6,28 +6,32 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import './Styles.css'
 import { createAlbum, deleteAlbum, getAlbums } from "../../../helpers/api";
-import  UploadPicture  from "../../UploadPicture/UploadPicute";
+import  {UploadPicture}  from "../../UploadPicture/UploadPicute";
 import { useNavigate } from 'react-router-dom';
 import { setAlbumId } from "../../../redux/album/action";
-import { connect, useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import trash from './trash.jpeg' 
 
 
-const Album = (props) => {
+export const Album = () => {
     const { user } = useSelector((state) => state.user);
+    //const { album } = useSelector((state) => state.album);
     const [open, setOpen] = React.useState(false)
     const [pictureModal, setPictureModal] = React.useState(false)
     const [render, setRender] = React.useState('')
     const [albums, setAlbums] = React.useState([])
     const [nameAlbum, setNameAlbumn] = React.useState('')
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     
     const uploadAlbum = async () => {
         try {
             const album = await createAlbum(nameAlbum,user.id)
-            props.setAlbumId(album.data.id)
+            dispatch(setAlbumId(album.data.id))
+            localStorage.setItem('album',album.data.id)
             setOpen(false)
             setPictureModal(true)
+            console.log(album)
         } catch (error) {
             console.log(error)
         }
@@ -40,8 +44,8 @@ const Album = (props) => {
 
     const removeAlbum = async (id) => {
         try {
+            console.log("Removing Album,",id)
             await deleteAlbum(id)
-            console.log("Removed Album")
         } catch (error) {
             console.log(error)
         }
@@ -113,6 +117,3 @@ const Album = (props) => {
         </div>
     )
 }
-const mapDispachtToProps = { setAlbumId }
-
-export default connect(null,mapDispachtToProps)(Album) 

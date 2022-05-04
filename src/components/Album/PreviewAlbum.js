@@ -4,7 +4,7 @@ import { getPicturesFromAlbum } from "../../helpers/api";
 import { Picture } from "../Picture/Picture";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import  UploadPicture  from "../UploadPicture/UploadPicute";
+import  {UploadPicture}  from "../UploadPicture/UploadPicute";
 import './Styles.css'
 import {  useDispatch } from "react-redux";
 import { setAlbumId } from "../../redux/album/action";
@@ -22,7 +22,8 @@ export const PreviewAlbum = () => {
     }
     
     React.useEffect(()=>{
-        dispatch(setAlbumId(albumInfo.id))
+        //dispatch(setAlbumId(albumInfo.id))
+        localStorage.setItem('album',albumInfo.id)
         getPicturesFromAlbum(Number(albumInfo.id))
             .then(res => {
                 setImages(res.data)
